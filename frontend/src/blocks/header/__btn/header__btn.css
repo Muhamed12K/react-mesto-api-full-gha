@@ -1,0 +1,23 @@
+.header__btn {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    color: #a9a9a9;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity .4s ease;
+}
+
+.header__btn:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 696px) {
+    .header__btn {
+        margin-top: calc(12.47126px - 1.70977vw);
+        font-size: calc(10.87356px + .97701vw);
+        line-height: calc(17 / 14 * 100%);
+    }
+}

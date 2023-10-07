@@ -1,0 +1,12 @@
+.card__btn_action_like{  
+  background-image: url(../../../../../src/images/like.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  height: 20px;
+  transition: all .3s ease;
+}
+
+.card__btn_action_like:enabled:hover {
+  opacity: .5;
+}

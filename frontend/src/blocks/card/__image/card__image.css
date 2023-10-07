@@ -1,0 +1,17 @@
+.card__image{
+  border-radius: 10px 10px 0 0;
+  color: #000;
+  min-height: 282px;
+  max-height: 282px;
+  margin: 0;
+  -o-object-fit: fill;
+  object-fit: cover;
+  -o-object-position: center 0;
+  object-position: center 0;
+  padding: 0;
+  width: 100%;
+}
+
+.card__image:hover {
+  cursor: pointer;
+}

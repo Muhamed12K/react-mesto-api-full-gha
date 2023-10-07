@@ -1,0 +1,10 @@
+.photo-grid{
+  margin: 0 19px;
+  max-width: 882px;
+}
+
+@media screen and (min-width: 901px){
+  .photo-grid{
+    margin: 50px auto 0 auto;
+  }
+}

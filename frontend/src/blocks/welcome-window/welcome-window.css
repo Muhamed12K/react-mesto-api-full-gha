@@ -1,0 +1,20 @@
+.welcome-window {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: calc(17 / 14 * 100%);
+    text-align: center;
+    color: #fff;
+}
+
+@media screen and (max-width: 696px) {
+    .welcome-window {
+        margin-left: calc(53.44828px - 7.32759vw);
+        margin-right: calc(53.44828px - 7.32759vw);
+        margin-top: calc(24.36782px + 4.88506vw);
+    }
+}

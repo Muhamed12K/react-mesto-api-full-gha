@@ -1,0 +1,7 @@
+.profile__avatar {
+    background-color: #000;
+    background-image: url("../../../../src/images/Vector (3).svg");
+    background-position: 40%;
+    background-repeat: no-repeat;
+    transition: opacity .8s ease-in-out;
+}

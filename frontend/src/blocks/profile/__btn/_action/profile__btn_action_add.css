@@ -1,0 +1,23 @@
+.profile__btn_action_add{
+  background-image: url(../../../../../src/images/Vector.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  flex: none;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0 40px;
+  transition: all .5s ease;
+}
+
+.profile__btn_action_add:enabled:hover {
+  opacity: .6;
+}
+
+@media screen and (min-width: 601px) {
+  .profile__btn_action_add{
+    width: 150px;
+    margin: 0;
+  }
+}

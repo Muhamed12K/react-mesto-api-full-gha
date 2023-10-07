@@ -1,0 +1,15 @@
+.card__btn_action_del {
+  background-image: url(../../../../../src/images/Group.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 19px;
+  position: absolute;
+  right: 15px;
+  top: 18px;
+  width: 18px;
+}
+
+.card__btn_action_del:enabled:hover {
+  opacity: .5;
+}

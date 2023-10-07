@@ -1,0 +1,10 @@
+.popup__btn {
+  background: none;
+  border: none;
+  box-shadow: none;
+  display: block;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+.profile__btn_action_edit{
+  background-image: url("../../../../../src/images/Vector (2).svg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  border: 1px solid #fff;
+  height: 18px;
+  margin-bottom: 0;
+  position: static;
+  transition: all .5s ease;
+  width: 18px;
+  }
+
+@media screen and (min-width: 601px) {
+  .profile__btn_action_edit{
+    flex: none;
+    height: 24px;
+    margin-bottom: -10px;
+    position: static;
+    width: 24px;
+  }
+}
+
+.profile__btn_action_edit:enabled:hover {
+  opacity: .6;
+}

@@ -65,7 +65,7 @@ class Api {
     }
 
     /**Функция передачи на сервер нового аватара */
-    setUserAvatar(src) {
+    setUserAvatar(avatar) {
       return this._request(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
@@ -77,7 +77,7 @@ class Api {
     }
 
     /**Функция удаления карточки с сервера */
-    deleteCard(cardId) {
+    deleteCard(id) {
       return this._request(`${this._baseUrl}/cards/${id}`, {
         method: 'DELETE',
         headers: {

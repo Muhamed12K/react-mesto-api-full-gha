@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { errors } = require('celebrate');
 
 const limiter = require('./middlewares/rateLimiter');
@@ -26,6 +28,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 
 const app = express();
 
+app.use(cors());
 app.use(helmet());
 
 app.use(bodyParser.json()); // для собирания JSON-формата

@@ -1,100 +1,111 @@
 import {apiConfig} from "./utils";
 
 class Api {
-    constructor(config) {
-        this._url           = config.url;
-        this._headers       = config.headers;
-        this._likesUrl = `${this._url}/cards/likes`;
-        this._authorization = config.headers['authorization'];
+    constructor() {
+        this._baseUrl = 'https://micky.nomoredomainsrocks.ru/';
     }
 
-    /**Проверить на ошибки */
-    _checkResponse(res) {
-        if (res.ok) {
-            return res.json();
-        }
+    _request(url, options) {
+      return fetch(url, options)
+        .then(this._checkResponse);
+    };
 
-        return Promise.reject(`Упс.... Что-то пошло не так! Ошибка: ${res.status}`);
+    /**Проверить на ошибки */
+    _checkResponse(response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        Promise.reject(`Ошибка: ${response.status}/${response.statusText}`);
+      };
     };
 
     /**Запросить данные с сервера */
     getInitialCards() {
-        return fetch(`${this._url}/cards`, {
-            headers: {
-                authorization: this._authorization
-            },
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/cards`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
+      });
     }
 
     /** Функция добавления новой карточки на сервер */
     addNewCard({name, link}) {
-        return fetch(`${this._url}/cards`, {
-            method : 'POST',
-            headers: this._headers,
-            body   : JSON.stringify({
-                name: name,
-                link: link,
-            }),
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/cards`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ name, link })
+      });
     };
 
     /**Функция получения данных пользователя с сервера*/
     getUserInfoApi() {
-        return fetch(`${this._url}/users/me`, {
-            headers: {
-                authorization: this._authorization
-            },
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/users/me`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'Content-type': 'application/json'
+          }
+        }
+      );
     }
 
     /** Функция передачи данных пользователя с сервера */
     setUserInfo({name, about}) {
-        return fetch(`${this._url}/users/me`, {
-            method : 'PATCH',
-            headers: this._headers,
-            body   : JSON.stringify({
-                name : name,
-                about: about,
-            }),
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/users/me`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ name, about })
+      });
     }
 
     /**Функция передачи на сервер нового аватара */
     setUserAvatar(src) {
-        return fetch(`${this._url}/users/me/avatar`, {
-            method : 'PATCH',
-            headers: this._headers,
-            body   : JSON.stringify({
-                avatar: src,
-            }),
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ avatar })
+      });
     }
 
     /**Функция удаления карточки с сервера */
     deleteCard(cardId) {
-        return fetch(`${this._url}/cards/${cardId}`, {
-            method : 'DELETE',
-            headers: {
-                authorization: this._authorization,
-            }
-        })
-            .then(res => this._checkResponse(res))
+      return this._request(`${this._baseUrl}/cards/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-type': 'application/json'
+        },
+      });
     }
 
     //** метод постановки/удаления лайка на карточке */
     changeLikeCardStatus(cardId, isNotLiked){
-        return fetch(`${this._likesUrl}/${cardId}`, {
-            method: isNotLiked ? "PUT" : "DELETE",
-            headers: {
-                authorization: this._authorization,
-            }
-        })
-            .then(res => this._checkResponse(res))
+      if (!isNotLiked) {
+        return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'Content-type': 'application/json'
+          },
+        });
+      } else {
+        return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            'Content-type': 'application/json'
+          },
+        });
+      }
     }
 
 }
@@ -102,3 +113,9 @@ class Api {
 const api = new Api(apiConfig)
 
 export {api};
+
+
+
+// this._headers       = config.headers;
+// this._likesUrl = `${this._url}/cards/likes`;
+// this._authorization = config.headers['authorization'];

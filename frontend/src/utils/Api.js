@@ -1,8 +1,8 @@
 import {apiConfig} from "./utils";
-
+//
 class Api {
     constructor() {
-        this._baseUrl = 'https://micky.nomoredomainsrocks.ru/';
+        this._baseUrl = 'https://micky.nomoredomainsrocks.ru';
     }
 
     _request(url, options) {

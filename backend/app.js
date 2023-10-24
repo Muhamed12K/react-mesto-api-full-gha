@@ -28,7 +28,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 
 const app = express();
 
-app.use(cors());
+const corseAllowedOrigins = [
+  'http://micky.nomoredomainsrocks.ru',
+  'https://micky.nomoredomainsrocks.ru'
+]
+app.use(cors({
+  origin: corseAllowedOrigins,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+
 app.use(helmet());
 
 app.use(bodyParser.json()); // для собирания JSON-формата

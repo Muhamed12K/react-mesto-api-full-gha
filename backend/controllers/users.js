@@ -60,7 +60,7 @@ function loginUser(req, res, next) {
           { expiresIn: '7d' },
         );
 
-        return res.send({ _id: token });
+        return res.send({ token });
       }
       throw new UnauthorizedError('Неправильные почта или пароль');
     })

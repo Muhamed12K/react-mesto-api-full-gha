@@ -7,6 +7,7 @@ const cors = require('cors');
 const { errors } = require('celebrate');
 
 const limiter = require('./middlewares/rateLimiter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const routeSignup = require('./routes/signup');
 const routeSignin = require('./routes/signin');
@@ -30,18 +31,34 @@ const app = express();
 
 const corseAllowedOrigins = [
   'http://micky.nomoredomainsrocks.ru',
-  'https://micky.nomoredomainsrocks.ru'
-]
+  'https://micky.nomoredomainsrocks.ru',
+  'localhost:3000',
+];
+
 app.use(cors({
   origin: corseAllowedOrigins,
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept ');
+
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 app.use(helmet());
 
 app.use(bodyParser.json()); // для собирания JSON-формата
 app.use(bodyParser.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
+
+app.use(requestLogger);
 
 app.use(limiter);
 
@@ -54,6 +71,7 @@ app.use('/users', routeUsers);
 app.use('/cards', routeCards);
 
 app.use((req, res, next) => next(new NotFoundError('Страницы по запрошенному URL не существует')));
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 

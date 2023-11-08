@@ -13,7 +13,7 @@ module.exports = (req, _, next) => {
     return next(new UnauthorizedError('Неправильные почта или пароль'));
   }
 
-  const token = authorization.replace(bearer, '');
+  const token = authorization.replace(bearer, 'jwt');
   let payload;
 
   try {

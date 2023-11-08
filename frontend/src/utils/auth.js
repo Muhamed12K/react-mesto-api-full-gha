@@ -30,7 +30,7 @@ export function authorizeUser(email, password) {
         .then(res => checkResponse(res))
         .then((data) => {
             if (data.token) {
-                const token = data.token;
+                const token = data;
                 localStorage.setItem('jwt', token);
 
                 return token;

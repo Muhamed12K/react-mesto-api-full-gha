@@ -2,7 +2,10 @@ import {apiConfig} from "./utils";
 //
 class Api {
     constructor() {
-        this._baseUrl = 'https://micky.nomoredomainsrocks.ru';
+        this._baseUrl       = 'https://micky.nomoredomainsrocks.ru';
+        this._headers       = apiConfig.headers;
+        this._likesUrl      = `${this._url}/cards/likes`;
+        this._authorization = apiConfig.headers['authorization'];
     }
 
     _request(url, options) {
@@ -113,9 +116,3 @@ class Api {
 const api = new Api(apiConfig)
 
 export {api};
-
-
-
-// this._headers       = config.headers;
-// this._likesUrl = `${this._url}/cards/likes`;
-// this._authorization = config.headers['authorization'];

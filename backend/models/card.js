@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const { ObjectId } = mongoose.Schema.Types;
+const { URL_REGEX } = require('../utils/constants');
 
 const cardSchema = new Schema(
   {
@@ -20,7 +21,7 @@ const cardSchema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: (url) => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/.test(url),
+        validator: (url) => URL_REGEX.test(url),
         message: 'Требуется ввести URL',
       },
     },

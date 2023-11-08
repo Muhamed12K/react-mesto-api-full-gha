@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { NODE_ENV, SECRET_SIGNING_KEY } = require('../utils/constants');
 
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const NotFoundError = require('../errors/NotFoundError');
@@ -48,7 +49,7 @@ function createUser(req, res, next) {
 
 function loginUser(req, res, next) {
   const { email, password } = req.body;
-  const secretSigningKey = '0f05cafa879700c8e152aa60d5f9543b2d7e3f5afc522bbca634c7205a1d74d0';
+  // const secretSigningKey = '0f05cafa879700c8e152aa60d5f9543b2d7e3f5afc522bbca634c7205a1d74d0';
 
   User
     .findUserByCredentials(email, password)
@@ -56,7 +57,7 @@ function loginUser(req, res, next) {
       if (userId) {
         const token = jwt.sign(
           { userId },
-          secretSigningKey,
+          NODE_ENV === 'production' ? SECRET_SIGNING_KEY : 'dev-secret',
           { expiresIn: '7d' },
         );
 

@@ -82,6 +82,7 @@ function App() {
                         _id: data._id,
                         email: data.email
                     };
+                  console.log(userData);
                     setUserData(userData);
                     handleLogin();
                     navigate('/', { replace: true });

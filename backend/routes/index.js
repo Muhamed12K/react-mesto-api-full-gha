@@ -9,9 +9,9 @@ const auth = require('../middlewares/auth');
 // const routeCards = require('./cards');
 
 // const NotFoundError = require('../errors/NotFoundError');
-router.get('/users/me', function (req) {
-  console.log(req);
-})
+// router.get('/users/me', function (req) {
+//   console.log(req);
+// })
 
 router.use('/', routeSignup);
 router.use('/', routeSignin);

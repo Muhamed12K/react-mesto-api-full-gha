@@ -50,7 +50,6 @@ function createUser(req, res, next) {
 function loginUser(req, res, next) {
   const { email, password } = req.body;
   // const secretSigningKey = '0f05cafa879700c8e152aa60d5f9543b2d7e3f5afc522bbca634c7205a1d74d0';
-
   User
     .findUserByCredentials(email, password)
     .then(({ _id: userId }) => {
@@ -65,7 +64,7 @@ function loginUser(req, res, next) {
       }
       throw new UnauthorizedError('Неправильные почта или пароль');
     })
-    .catch(next);
+  .catch(next);
 }
 
 function getUsersInfo(_, res, next) {

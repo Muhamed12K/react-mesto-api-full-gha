@@ -56,13 +56,14 @@ const userSchema = new Schema(
   },
 
   {
-    versionKey: false,
+ //   versionKey: false,
     statics: {
       findUserByCredentials(email, password) {
         return this
           .findOne({ email })
           .select('+password')
           .then((user) => {
+            console.log(user);
             if (user) {
               return bcrypt.compare(password, user.password)
                 .then((matched) => {
@@ -76,6 +77,7 @@ const userSchema = new Schema(
           });
       },
     },
+
   },
 );
 

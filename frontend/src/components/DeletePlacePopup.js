@@ -1,5 +1,6 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm.js';
+import { useEffect } from "react";
 
 // Компонент попапа добавления карточки
 function DeletePlacePopup({ deleteCard:{ isOpen, card }, onClose, onOverlayClose, onDeleteCard, isRender }) {

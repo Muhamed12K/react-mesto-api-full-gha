@@ -1,4 +1,6 @@
-const BASE_URL = 'https://api.micky.nomoredomainsrocks.ru';
+const BASE_URL = 'http://localhost:3000';
+
+// const BASE_URL = 'https://api.micky.nomoredomainsrocks.ru';
 
 function checkResponse(res) {
     if (res.ok) {
@@ -30,9 +32,10 @@ export function authorizeUser(email, password) {
         .then(res => checkResponse(res))
         .then((data) => {
             if (data.token) {
-                const token = data;
+                const token = data.token;
+              console.log(token);
                 localStorage.setItem('jwt', token);
-
+              console.log(localStorage);
                 return token;
             };
         })
